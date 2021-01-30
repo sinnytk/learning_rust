@@ -23,14 +23,58 @@ fn fahr_to_cel(tmp_in_fahr : f64) -> f64{
 fn cel_to_fahr(tmp_in_cel : f64) -> f64{
     (tmp_in_cel * 9.0/5.0) + 32.0
 }
+fn twelve_days_of_christmas(){
+    let days = ["first","second","third","fourth",
+                "fifth","sixth","seventh","eighth",
+                "ninth","tenth","eleventh","twelfth"];
+
+    let count = ["A","Two","Three","Four","Five",
+                 "Six","Seven","Eight","Nine",
+                 "Ten","Eleven","Twelve"];
+
+    let gifts = ["partridge in a pear tree",
+                 "turtle doves",
+                 "French hens",
+                 "calling birds",
+                 "gold rings",
+                 "geese a-laying",
+                 "swans a-swimming",
+                 "maids a-milking",
+                 "ladies dancing",
+                 "lords a-leaping",
+                 "pipers piping",
+                 "drummers drumming"];
+
+    let mut day_counter = 0;
+    for day in days.iter(){
+        println!("The {} day of Christmas,",day);
+        println!("my true love sent to me");
+        for cnt in (0..=day_counter).rev(){
+            print!("{} {}",count[cnt],gifts[cnt]);
+            if cnt > 0 {
+                print!(",");
+                if cnt == 1 {
+                    println!(" and");
+                }
+                else{
+                    println!("");
+                }
+            }
+        }
+        println!("\n");
+        day_counter+=1;
+
+    }
+}
 fn main() {
     println!("What function do you want to run?");
     println!("1: Print nth Fibonacci term");
     println!("2: Convert celsius to fahrenheit");
     println!("3: Convert fahrenheit to celsius");
+    println!("4: Print `Twelve Days Of Christmas` programmatically");
+
     println!("\n");
     println!("Enter valid function number:");
-
     let mut function_input = String::new();
     io::stdin()
         .read_line(&mut function_input)
@@ -40,6 +84,7 @@ fn main() {
                  .parse()
                  .expect("Please make sure input is a number");
 
+    println!("\n\n");
     match function_input{
         1 => {
             // Fibonacci
@@ -83,6 +128,9 @@ fn main() {
                 println!("{}℉ is {}℃",temp,fahr_to_cel(temp));
 
             }
+        }
+        4 => {
+            twelve_days_of_christmas();
         }
         _ => {
             println!("Invalid function number!, try again..")
